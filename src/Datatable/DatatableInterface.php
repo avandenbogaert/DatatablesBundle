@@ -30,6 +30,13 @@ interface DatatableInterface
     public function addColumn(ColumnInterface $column): DatatableInterface;
 
     /**
+     * @param string $name
+     * @param \closure $function
+     * @return DatatableInterface
+     */
+    public function addRowOption(string $name, \closure $function): DatatableInterface;
+
+    /**
      * Sets an option, passed to the javascript options array used by DataTables.net
      *
      * @param string $name

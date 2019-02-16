@@ -42,6 +42,11 @@ class Datatable implements DatatableInterface
     private $requestParams = [];
 
     /**
+     * @var array
+     */
+    private $rowOptions = [];
+
+    /**
      * Datatable constructor.
      *
      * @param string $alias
@@ -78,6 +83,19 @@ class Datatable implements DatatableInterface
             $row = [];
             foreach ($this->columns as $column) {
                 $row[] = $column->extractValue($target);
+
+                foreach ($this->rowOptions as $name => $extractor) {
+
+                    if ($name === 'class') {
+                        $name = 'DT_RowClass';
+                    }
+
+                    if ($name === 'id') {
+                        $name = 'DT_RowId';
+                    }
+
+                    $row[$name] = $extractor($target);
+                }
             }
             $data[] = $row;
         }
@@ -99,6 +117,15 @@ class Datatable implements DatatableInterface
     public function setRequestParam($name, $value): void
     {
         $this->requestParams[$name] = $value;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addRowOption(string $name, \closure $function): DatatableInterface
+    {
+        $this->rowOptions[$name] = $function;
+        return $this;
     }
 
     /**
