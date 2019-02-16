@@ -22,6 +22,16 @@ interface DatatableInterface
     public function buildResponse(RequestInterface $request): Response;
 
     /**
+     * @return string
+     */
+    public function getClass(): string;
+
+    /**
+     * @param string $class
+     */
+    public function setClass(string $class): void;
+
+    /**
      * Adds a Column element to the DataTable's columns
      *
      * @param ColumnInterface $column

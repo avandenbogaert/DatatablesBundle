@@ -1,4 +1,4 @@
-<table data-uri="{{ uri }}" data-alias="{{ table.alias }}" data-options="{{ table.options|json_encode }}" data-request-params="{{ table.requestParams|json_encode }}" class="table datatable" role="grid">
+<table data-uri="{{ uri }}" data-alias="{{ table.alias }}" data-options="{{ table.options|json_encode }}" data-request-params="{{ table.requestParams|json_encode }}" class="datatable table {{ table.class }}" role="grid">
     <thead>
         {% include '@Datatables/Datatables/default_table_header.html.twig' %}
     </thead>

@@ -47,6 +47,14 @@ class Request implements RequestInterface
     /**
      * @inheritdoc
      */
+    public function getRequestParam(string $name)
+    {
+        return $this->request->query->get('params', [])[$name] ?? null;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getPageSize($default = null)
     {
         if(null === $default) {

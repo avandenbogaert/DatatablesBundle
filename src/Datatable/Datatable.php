@@ -16,6 +16,8 @@ use Avdb\DatatablesBundle\Response\Response;
  */
 class Datatable implements DatatableInterface
 {
+    public const CLASS_TABLE_STRIPED = 'table-striped';
+
     /**
      * @var DataExtractorInterface
      */
@@ -45,6 +47,11 @@ class Datatable implements DatatableInterface
      * @var array
      */
     private $rowOptions = [];
+
+    /**
+     * @var string
+     */
+    private $class = '';
 
     /**
      * Datatable constructor.
@@ -80,8 +87,11 @@ class Datatable implements DatatableInterface
         $data = [];
 
         foreach ($result->getData() as $target) {
+
             $row = [];
+            
             foreach ($this->columns as $column) {
+
                 $row[] = $column->extractValue($target);
 
                 foreach ($this->rowOptions as $name => $extractor) {
@@ -97,10 +107,27 @@ class Datatable implements DatatableInterface
                     $row[$name] = $extractor($target);
                 }
             }
+
             $data[] = $row;
         }
 
         return new Response($data, $result->getTotalRecords(), $request->getDraw() + 1);
+    }
+
+    /**
+     * @return string
+     */
+    public function getClass(): string
+    {
+        return $this->class;
+    }
+
+    /**
+     * @param string $class
+     */
+    public function setClass(string $class): void
+    {
+        $this->class = $class;
     }
 
     /**

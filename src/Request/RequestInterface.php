@@ -16,6 +16,14 @@ interface RequestInterface
     public function getHttpRequest();
 
     /**
+     * Get the request param passed through the datatable
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function getRequestParam(string $name);
+
+    /**
      * Get Page size from request
      *
      * @param null|string $default
