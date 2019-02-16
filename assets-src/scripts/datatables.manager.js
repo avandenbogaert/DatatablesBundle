@@ -20,3 +20,5 @@
 
     $.extend($, {DatatablesManager: Manager});
 })(jQuery);
+
+

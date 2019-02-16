@@ -37,6 +37,11 @@ class Datatable implements DatatableInterface
     private $options = [];
 
     /**
+     * @var array
+     */
+    private $requestParams = [];
+
+    /**
      * Datatable constructor.
      *
      * @param string $alias
@@ -57,7 +62,7 @@ class Datatable implements DatatableInterface
      * @return Response
      * @throws RuntimeException
      */
-    public function buildResponse(RequestInterface $request)
+    public function buildResponse(RequestInterface $request): Response
     {
         $result = $this->extractor->extract($request);
 
@@ -83,15 +88,31 @@ class Datatable implements DatatableInterface
     /**
      * @inheritDoc
      */
-    public function setOption($name, $value)
+    public function setOption($name, $value): void
     {
         $this->options[$name] = $value;
     }
 
     /**
+     * @inheritdoc
+     */
+    public function setRequestParam($name, $value): void
+    {
+        $this->requestParams[$name] = $value;
+    }
+
+    /**
      * @return array
      */
-    public function getOptions()
+    public function getRequestParams(): array
+    {
+        return $this->requestParams;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOptions(): array
     {
         return $this->options;
     }
@@ -102,7 +123,7 @@ class Datatable implements DatatableInterface
      * @param ColumnInterface $column
      * @return DataTableInterface
      */
-    public function addColumn(ColumnInterface $column)
+    public function addColumn(ColumnInterface $column): DatatableInterface
     {
         $this->columns[$column->getName()] = $column;
         return $this;
@@ -115,7 +136,7 @@ class Datatable implements DatatableInterface
      * @param array $options
      * @return DataTableInterface
      */
-    public function createColumn($name, array $options = [])
+    public function createColumn($name, array $options = []): DatatableInterface
     {
         return $this->addColumn(new Column($name, $options));
     }
@@ -125,7 +146,7 @@ class Datatable implements DatatableInterface
      *
      * @return array|ColumnInterface[]
      */
-    public function getColumns()
+    public function getColumns(): array
     {
         return $this->columns;
     }
@@ -135,7 +156,7 @@ class Datatable implements DatatableInterface
      *
      * @return string
      */
-    public function getAlias()
+    public function getAlias(): string
     {
         return $this->alias;
     }

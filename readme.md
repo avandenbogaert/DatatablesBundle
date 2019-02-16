@@ -312,7 +312,16 @@ in your layout.html.twig file:
 ```twig
 {% block stylesheets %}
     <!--- Other stylesheets -->
-    <link rel="stylesheet" href="{{ asset('bundles/datatables/css/datatables-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/datatables/css/datatables-bootstrap-3.min.css') }}">
+{% endblock %}
+```
+
+Or for bootstrap 4:
+
+```twig
+{% block stylesheets %}
+    <!--- Other stylesheets -->
+    <link rel="stylesheet" href="{{ asset('bundles/datatables/css/datatables-bootstrap-4.min.css') }}">
 {% endblock %}
 ```
 
@@ -324,7 +333,16 @@ The same goes for the javascript file:
 ```twig
 {% block javascripts %}
     <!-- other scripts -->
-    <script src="{{ asset('bundles/datatables/js/datatables-bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bundles/datatables/js/datatables-bootstrap-3.min.js') }}"></script>
+{% endblock %}
+```
+
+Or for bootstrap 4:
+
+```twig
+{% block javascripts %}
+    <!-- other scripts -->
+    <script src="{{ asset('bundles/datatables/js/datatables-bootstrap-4.min.js') }}"></script>
 {% endblock %}
 ```
 
@@ -334,7 +352,7 @@ To enable the use of Font-Awesome icons (sorting icons etc.) you need to include
 ```twig
 {% block stylesheets %}
     <!--- Other stylesheets -->
-    <link rel="stylesheet" href="{{ asset('bundles/datatables/css/datatables-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/datatables/css/datatables-bootstrap-4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('bundles/datatables/css/datatables-font-awesome.min.css') }}">
 {% endblock %}
 ```

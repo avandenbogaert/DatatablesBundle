@@ -1,23 +1,21 @@
 (function ($) {
     $(function () {
         $('table.datatable').each(function () {
-            var defaultOptions = {
+            let $element = $(this);
+
+            let defaultOptions = {
                 "processing": true,
                 "serverSide": true,
                 "ajax": {
                     "url": $(this).data('uri'),
                     "data": function (data) {
-                        var $form = $('form[datatables="filter"]');
-
-                        if ($form.length > 0) {
-                            data.filter = $form.find('input, select').serializeArray();
-                        }
+                        data['params'] = $element.data('request-params');
                     }
                 }
             };
 
-            var $options = $.extend({}, defaultOptions, $(this).data('options'));
-            var $table = $(this).DataTable($options);
+            let $options = $.extend({}, defaultOptions, $(this).data('options'));
+            let $table = $(this).DataTable($options);
 
             $.DatatablesManager.register($(this).data('alias'), $table);
         });

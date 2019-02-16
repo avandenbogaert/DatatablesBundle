@@ -19,7 +19,7 @@ interface DatatableInterface
      * @param RequestInterface $request
      * @return Response
      */
-    public function buildResponse(RequestInterface $request);
+    public function buildResponse(RequestInterface $request): Response;
 
     /**
      * Adds a Column element to the DataTable's columns
@@ -27,23 +27,37 @@ interface DatatableInterface
      * @param ColumnInterface $column
      * @return DataTableInterface
      */
-    public function addColumn(ColumnInterface $column);
+    public function addColumn(ColumnInterface $column): DatatableInterface;
 
     /**
      * Sets an option, passed to the javascript options array used by DataTables.net
      *
      * @param string $name
      * @param mixed $value
-     * @return mixed
+     * @return void
      */
-    public function setOption($name, $value);
+    public function setOption(string $name, $value): void;
+
+    /**
+     * Set a value that will be sent to the DataExtractor as a request parameter
+     *
+     * @param string $name
+     * @param mixed $value
+     * @return void
+     */
+    public function setRequestParam(string $name, $value): void;
+
+    /**
+     * @return array
+     */
+    public function getRequestParams(): array;
 
     /**
      * Returns an array of options
      *
      * @return array
      */
-    public function getOptions();
+    public function getOptions(): array;
 
     /**
      * Creates a Column element and adds it tho the DataTable's columns
@@ -52,19 +66,19 @@ interface DatatableInterface
      * @param array $options
      * @return DataTableInterface
      */
-    public function createColumn($name, array $options = []);
+    public function createColumn(string $name, array $options = []): DatatableInterface;
 
     /**
      * Returns all columns that are present in the table
      *
      * @return array|ColumnInterface[]
      */
-    public function getColumns();
+    public function getColumns(): array;
 
     /**
      * Returns the alias of the table for which it is registered in the manager
      *
      * @return string
      */
-    public function getAlias();
+    public function getAlias(): string;
 }

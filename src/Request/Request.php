@@ -96,7 +96,7 @@ class Request implements RequestInterface
             return $default ?: self::$defaults['sort'];
         }
 
-        return (string)$sort;
+        return (string)($sort ?: $default);
     }
 
     /**
