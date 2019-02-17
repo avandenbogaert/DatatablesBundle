@@ -5,3 +5,4 @@
 /bower_components
 /.sass-cache
 /.idea
+package-lock.json
