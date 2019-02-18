@@ -1,6 +1,7 @@
 <?php
 namespace Avdb\DatatablesBundle;
 
+use Avdb\DatatablesBundle\DependencyInjection\Compiler\DataExtractorCompilerPass;
 use Avdb\DatatablesBundle\DependencyInjection\Compiler\DatatablesCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -14,6 +15,7 @@ class DatatablesBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
+        $container->addCompilerPass(new DataExtractorCompilerPass());
         $container->addCompilerPass(new DatatablesCompilerPass());
     }
 }

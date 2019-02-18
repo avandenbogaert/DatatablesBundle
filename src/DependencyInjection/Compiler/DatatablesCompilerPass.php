@@ -8,7 +8,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Class DatatableCompilerPass
  * Registers the Datatables in the DatatableManager
  * 
  * @package Avdb\DatatablesBundle\DependencyInjection\Compiler
@@ -34,7 +33,23 @@ class DatatablesCompilerPass implements CompilerPassInterface
         $tables = $container->findTaggedServiceIds(Configuration::TAG_TABLE);
 
         foreach ($tables as $id => $tags) {
-            $manager->addMethodCall('add', [new Reference($id)]);
+
+            foreach($tags as $attributes) {
+
+                if(!isset($attributes['alias']) || empty($attributes['alias'])) {
+                    throw new RuntimeException("
+                        Error compiling service : '$id'
+                        Cannot register table without alias, 
+                        please provide the correct alias to the service definition
+                    ");
+                }
+
+                $manager->addMethodCall('add', [$attributes['alias'], new Reference($id)]);
+
+                // set alias to the datatable
+                $tableDefinition = $container->getDefinition($id);
+                $tableDefinition->addMethodCall('setAlias', [$attributes['alias']]);
+            }
         }
     }
 }

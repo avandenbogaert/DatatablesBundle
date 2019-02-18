@@ -111,12 +111,16 @@ DatatableCompilerPass. This will allow the DataController to call the correct da
 ```yml
 services:
 
+    # Make sure the alias in both tags match, the compiler passes will link them together based on the alias used.
+
     #  Extractor
     app.datatable.extractor.product:
         class: App\AppBundle\Datatable\Extractor\ProductExtractor
         arguments:
             - '@doctrine'
-
+        tags:
+            - {name: 'avdb_datatables.extractor', alias: 'products'} 
+            
     #  Table
     app.datatable.table.product:
         class: Avdb\DatatablesBundle\Datatable\Datatable
@@ -124,7 +128,7 @@ services:
         arguments:
             - '@app.datatable.extractor.product'
         tags:
-            - {name: 'avdb_datatables.table'}
+            - {name: 'avdb_datatables.table', alias: 'products'}
 
 ```
 

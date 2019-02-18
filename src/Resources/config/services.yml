@@ -5,11 +5,15 @@ services:
         public: true
         arguments:
             - '@avdb_datatables.manager'
+            - '@avdb_datatables.factory.response'
+
+    # Factory
+    avdb_datatables.factory.response:
+        class: Avdb\DatatablesBundle\Factory\ResponseFactory
 
     # Manager
     avdb_datatables.manager:
         class: Avdb\DatatablesBundle\Manager\DatatableManager
-
 
     # Twig
     avdb_datatables.twig_extension:

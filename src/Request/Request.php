@@ -39,7 +39,7 @@ class Request implements RequestInterface
     /**
      * @inheritdoc
      */
-    public function getHttpRequest()
+    public function getHttpRequest(): HttpRequest
     {
         return $this->request;
     }
@@ -47,15 +47,17 @@ class Request implements RequestInterface
     /**
      * @inheritdoc
      */
-    public function getRequestParam(string $name)
+    public function getRequestParam(string $name): ?string
     {
-        return $this->request->query->get('params', [])[$name] ?? null;
+        $params = $this->request->query->get('params', []);
+
+        return isset($params[$name]) ? (string)$params[$name] : null;
     }
 
     /**
      * @inheritdoc
      */
-    public function getPageSize($default = null)
+    public function getPageSize($default = null): int
     {
         if(null === $default) {
             $default = self::$defaults['page_size'];
@@ -67,7 +69,7 @@ class Request implements RequestInterface
     /**
      * @inheritdoc
      */
-    public function getPage()
+    public function getPage(): int
     {
         $offset = $this->request->query->get('start', 0);
         $size = $this->getPageSize();
@@ -78,7 +80,7 @@ class Request implements RequestInterface
     /**
      * @inheritdoc
      */
-    public function getOffset()
+    public function getOffset(): int
     {
         return $this->request->query->get('start', 0);
     }
@@ -86,7 +88,7 @@ class Request implements RequestInterface
     /**
      * @inheritdoc
      */
-    public function getSort($default = null)
+    public function getSort($default = null): ?string
     {
         $order = $this->request->query->get('order', []);
 
@@ -110,7 +112,7 @@ class Request implements RequestInterface
     /**
      * @inheritdoc
      */
-    public function getOrder($default = null)
+    public function getOrder($default = null): ?string
     {
         $order = $this->request->query->get('order', []);
 
@@ -124,16 +126,16 @@ class Request implements RequestInterface
     /**
      * @inheritdoc
      */
-    public function getSearch()
+    public function getSearch(): string
     {
         $search = $this->request->query->get('search', []);
-        return isset($search['value']) ? $search['value'] : null;
+        return isset($search['value']) ? (string)$search['value'] : null;
     }
 
     /**
      * @inheritdoc
      */
-    public function getDraw()
+    public function getDraw(): int
     {
         return (int)$this->request->query->get('draw', 0);
     }

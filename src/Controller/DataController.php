@@ -1,6 +1,7 @@
 <?php
 namespace Avdb\DatatablesBundle\Controller;
 
+use Avdb\DatatablesBundle\Factory\ResponseFactory;
 use Avdb\DatatablesBundle\Manager\DatatableManagerInterface;
 use Avdb\DatatablesBundle\Request\Request;
 use Avdb\DatatablesBundle\Response\Response;
@@ -20,13 +21,14 @@ class DataController
     private $manager;
 
     /**
-     * DataController constructor.
-     *
-     * @param DatatableManagerInterface $manager
+     * @var ResponseFactory
      */
-    public function __construct(DatatableManagerInterface $manager)
+    private $responseFactory;
+
+    public function __construct(DatatableManagerInterface $manager, ResponseFactory $responseFactory)
     {
         $this->manager = $manager;
+        $this->responseFactory = $responseFactory;
     }
 
     /**
@@ -40,6 +42,6 @@ class DataController
     {
         $table = $this->manager->get($alias);
 
-        return $table->buildResponse(new Request($request));
+        return $this->responseFactory->createResponse($table, new Request($request));
     }
 }

@@ -28,24 +28,17 @@ class DatatableManager implements DatatableManagerInterface
     }
 
     /**
-     * Checks if the manager has a Datatable with given alias
-     *
-     * @param $alias
-     * @return bool
+     * @inheritdoc
      */
-    public function has($alias)
+    public function has(string $alias): bool
     {
         return $this->datatables->get($alias) instanceof DatatableInterface;
     }
 
     /**
-     * Returns the Datatable registered with the given alias
-     *
-     * @param $alias
-     * @return DatatableInterface
-     * @throws DatatableNotFoundException
+     * @inheritdoc
      */
-    public function get($alias)
+    public function get(string $alias): DatatableInterface
     {
         if (true !== $this->has($alias)) {
             throw DatatableNotFoundException::fromAlias($alias);
@@ -55,19 +48,16 @@ class DatatableManager implements DatatableManagerInterface
     }
 
     /**
-     * Registers a datatable under its current alias
-     *
-     * @param DatatableInterface $datatable
-     * @throws RuntimeException
+     * @inheritdoc
      */
-    public function add(DatatableInterface $datatable)
+    public function add(string $alias, DatatableInterface $datatable): void
     {
-        if (true === $this->has($datatable->getAlias())) {
+        if (true === $this->has($alias)) {
             throw new RuntimeException(
-                "Datatable {$datatable->getAlias()} is already registered, cannot register a table twice"
+                "Datatable {$alias} is already registered, cannot register a table twice"
             );
         }
 
-        $this->datatables->set($datatable->getAlias(), $datatable);
+        $this->datatables->set($alias, $datatable);
     }
 }

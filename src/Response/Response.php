@@ -17,7 +17,7 @@ class Response extends JsonResponse
      * @param integer $totalRecords
      * @param integer $draw
      */
-    public function __construct(array $data, $totalRecords, $draw)
+    public function __construct(array $data, int $totalRecords, int $draw)
     {
         parent::__construct([
             'data'              => $data,

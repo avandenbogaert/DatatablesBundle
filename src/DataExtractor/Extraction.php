@@ -50,4 +50,6 @@ class Extraction implements ExtractionInterface
     {
         return $this->totalRecords;
     }
+
+
 }

@@ -13,15 +13,8 @@ use Avdb\DatatablesBundle\Response\Response;
 interface DatatableInterface
 {
     /**
-     * Generates the correct API-response for the DataTable,
-     * should be indulged into a JSONResponse Object by the controller
+     * The extra HTML-class attribute the table will receive
      *
-     * @param RequestInterface $request
-     * @return Response
-     */
-    public function buildResponse(RequestInterface $request): Response;
-
-    /**
      * @return string
      */
     public function getClass(): string;
@@ -45,6 +38,11 @@ interface DatatableInterface
      * @return DatatableInterface
      */
     public function addRowOption(string $name, \closure $function): DatatableInterface;
+
+    /**
+     * @return array|\Closure[]
+     */
+    public function getRowOptions(): array;
 
     /**
      * Sets an option, passed to the javascript options array used by DataTables.net
@@ -98,4 +96,10 @@ interface DatatableInterface
      * @return string
      */
     public function getAlias(): string;
+
+    /**
+     * @param string $alias
+     * @internal This value is set through the DatatableCompilerPass and should not be set manually.
+     */
+    public function setAlias(string $alias): void;
 }

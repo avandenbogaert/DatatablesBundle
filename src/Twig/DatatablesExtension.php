@@ -96,6 +96,7 @@ class DatatablesExtension extends \Twig_Extension
     public function renderTable(\Twig_Environment $twig, DatatableInterface $table, array $options = [])
     {
         $options = array_merge($this->options, $options);
+
         return $twig->render($options['template'], [
             'table'   => $table,
             'options' => $options,

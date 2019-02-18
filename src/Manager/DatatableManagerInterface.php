@@ -15,10 +15,10 @@ interface DatatableManagerInterface
     /**
      * Checks if the manager has a Datatable with given alias
      *
-     * @param $alias
+     * @param string $alias
      * @return bool
      */
-    public function has($alias);
+    public function has(string $alias): bool;
 
     /**
      * Returns the Datatable registered with the given alias
@@ -27,13 +27,15 @@ interface DatatableManagerInterface
      * @return DatatableInterface
      * @throws DatatableNotFoundException
      */
-    public function get($alias);
+    public function get(string $alias): DatatableInterface;
 
     /**
      * Registers a datatable under its current alias
      *
+     * @param string $alias
      * @param DatatableInterface $datatable
+     *
      * @throws RuntimeException
      */
-    public function add(DatatableInterface $datatable);
+    public function add(string $alias, DatatableInterface $datatable): void;
 }

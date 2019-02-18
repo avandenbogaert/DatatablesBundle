@@ -11,17 +11,19 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
-    const ROOT_NODE = 'avdb_datatables';
-    const PATH_FACTORY   = '/Datatables/Factory';
-    const PATH_EXTRACTOR = '/Datatables/DataExtractor';
-    const PATH_CONFIG    = '/Resources/config/datatables';
-    const SUFFIX_FACTORY   = 'DatatableFactory.php';
-    const SUFFIX_EXTRACTOR = 'DataExtractor.php';
-    const SUFFIX_CONFIG    = '.datatable.yml';
-    const NAMESPACE_FACTORY   = '%s\Datatables\Factory\%sDatatableFactory';
-    const NAMESPACE_EXTRACTOR = '%s\Datatables\DataExtractor\%sDataExtractor';
-    const DEFINITION_MANAGER = 'avdb_datatables.manager';
-    const TAG_TABLE = 'avdb_datatables.table';
+    public const ROOT_NODE = 'avdb_datatables';
+    public const PATH_FACTORY   = '/Datatables/Factory';
+    public const PATH_EXTRACTOR = '/Datatables/DataExtractor';
+    public const PATH_CONFIG    = '/Resources/config/datatables';
+    public const SUFFIX_FACTORY   = 'DatatableFactory.php';
+    public const SUFFIX_EXTRACTOR = 'DataExtractor.php';
+    public const SUFFIX_CONFIG    = '.datatable.yml';
+    public const NAMESPACE_FACTORY   = '%s\Datatables\Factory\%sDatatableFactory';
+    public const NAMESPACE_EXTRACTOR = '%s\Datatables\DataExtractor\%sDataExtractor';
+    public const DEFINITION_MANAGER = 'avdb_datatables.manager';
+    public const DEFINITION_FACTORY = 'avdb_datatables.factory.response';
+    public const TAG_TABLE = 'avdb_datatables.table';
+    public const TAG_EXTRACTOR = 'avdb_datatables.extractor';
 
     /**
      * {@inheritdoc}
