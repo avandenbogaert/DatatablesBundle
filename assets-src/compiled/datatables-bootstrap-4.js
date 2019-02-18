@@ -376,10 +376,6 @@ return DataTable;
 
 
 (function ($) {
-
-    console.log('yolo nigga');
-
-
     $(function () {
         $('table.datatable').each(function () {
             let $element = $(this);

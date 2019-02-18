@@ -191,10 +191,6 @@ h.each(n,function(a,b){h.fn.DataTable[a]=b});return h.fn.dataTable});
 
 
 (function ($) {
-
-    console.log('yolo nigga');
-
-
     $(function () {
         $('table.datatable').each(function () {
             let $element = $(this);
