@@ -126,7 +126,7 @@ class Request implements RequestInterface
     /**
      * @inheritdoc
      */
-    public function getSearch(): string
+    public function getSearch(): ?string
     {
         $search = $this->request->query->get('search', []);
         return isset($search['value']) ? (string)$search['value'] : null;

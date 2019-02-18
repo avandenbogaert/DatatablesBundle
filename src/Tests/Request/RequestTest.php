@@ -80,10 +80,10 @@ class RequestTest extends DatatablesTestCase
         $this->assertEquals('asc', $request->getOrder());
     }
 
-    public function testGetSearchReturnsDefaultWhenNoneFound()
+    public function testGetSearchReturnsNullWhenNoneIsEntered()
     {
         $request = new DatatableRequest(new Request());
-        $this->assertEquals('', $request->getSearch());
+        $this->assertNull($request->getSearch());
     }
 
     public function testCanGetSearchFromRequest()

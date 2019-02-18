@@ -18,18 +18,14 @@ class DatatableTest extends DatatablesTestCase
 {
     public function testIsInitializable()
     {
-        $extractor = $this->getMockObject(DataExtractorInterface::class);
-        $table = new Datatable('test', $extractor);
+        $table = new Datatable();
         $this->assertInstanceOf(DatatableInterface::class, $table);
-        $this->assertEquals('test', $table->getAlias());
     }
 
     public function testCanAddColumns()
     {
-        $extractor = $this->getMockObject(DataExtractorInterface::class);
-        $table = new Datatable('test', $extractor);
+        $table = new Datatable();
 
-        $this->assertTrue(is_array($table->getColumns()));
         $this->assertCount(0, $table->getColumns());
 
         $table->addColumn(new Column('name'));
@@ -39,10 +35,8 @@ class DatatableTest extends DatatablesTestCase
 
     public function testCanCreateColumns()
     {
-        $extractor = $this->getMockObject(DataExtractorInterface::class);
-        $table = new Datatable('test', $extractor);
+        $table = new Datatable();
 
-        $this->assertTrue(is_array($table->getColumns()));
         $this->assertCount(0, $table->getColumns());
 
         $table->createColumn('test');
@@ -50,46 +44,12 @@ class DatatableTest extends DatatablesTestCase
 
         $this->assertInstancesOf(ColumnInterface::class, $table->getColumns());
     }
-    
-    public function testShouldThrowExceptionWhenNoExtractionIsReturned()
+
+    public function testCanAddRequestParam()
     {
-        $request   = $this->getMockObject(RequestInterface::class);
-        $extractor = $this->getMockObject(DataExtractorInterface::class);
-        $extractor
-            ->method('extract')
-            ->with($request)
-            ->willReturn(['something-wong']);
-        
-        $this->expectException(RuntimeException::class);
-        $table = new Datatable('test', $extractor);
-        $table->buildResponse($request);
-    }
+        $table = new Datatable();
+        $table->setRequestParam('some', 'bar');
 
-    public function testBuildResponse()
-    {
-        $extractor = $this->getMockObject(DataExtractorInterface::class);
-        $column    = $this->getMockObject(ColumnInterface::class);
-        $request   = $this->getMockObject(RequestInterface::class);
-
-        $extractor
-            ->method('extract')
-            ->willReturn(new Extraction([new \stdClass()], 1));
-
-        $column
-            ->method('extractValue')
-            ->willReturn('some-value');
-
-        $request
-            ->method('getDraw')
-            ->willReturn(0);
-
-        $table = new Datatable('test', $extractor);
-        $table->addColumn($column);
-
-
-        $response = $table->buildResponse($request);
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertContains('some-value', $response->getContent());
+        $this->assertEquals('bar', $table->getRequestParams()['some']);
     }
 }

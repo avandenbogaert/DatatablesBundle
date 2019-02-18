@@ -13,7 +13,7 @@ class DatatableManagerTest extends DatatablesTestCase
     public function testCanAddDatatable()
     {
         $manager = new DatatableManager();
-        $manager->add($this->mockTable('mock'));
+        $manager->add('mock', $this->mockTable('mock'));
 
         $this->assertInstanceOf(DatatableInterface::class, $manager->get('mock'));
     }
@@ -22,7 +22,7 @@ class DatatableManagerTest extends DatatablesTestCase
     {
         $manager = new DatatableManager();
         $this->assertFalse($manager->has('some-alias'));
-        $manager->add($this->mockTable('some-alias'));
+        $manager->add('some-alias', $this->mockTable('some-alias'));
         $this->assertTrue($manager->has('some-alias'));
     }
 
@@ -36,7 +36,7 @@ class DatatableManagerTest extends DatatablesTestCase
     public function testReturnsTableWhenGetIsCalled()
     {
         $manager = new DatatableManager();
-        $manager->add($this->mockTable('mock'));
+        $manager->add('mock', $this->mockTable('mock'));
         $this->assertInstanceOf(DatatableInterface::class, $manager->get('mock'));
     }
 
@@ -45,8 +45,8 @@ class DatatableManagerTest extends DatatablesTestCase
         $manager = new DatatableManager();
         $table = $this->mockTable('duplicate');
 
-        $manager->add($table);
+        $manager->add('duplicate', $table);
         $this->expectException(RuntimeException::class);
-        $manager->add($table);
+        $manager->add('duplicate', $table);
     }
 }

@@ -55,8 +55,7 @@ class DateTimeColumn extends Column
 
         if(!$dateTime instanceof \DateTime) {
             throw new RuntimeException(
-                'Expected the extractor to extract a \DateTime object, got instance of ' .
-                get_class($dateTime) . ' instead'
+                'Expected the extractor to extract a \DateTime object.'
             );
         }
 
